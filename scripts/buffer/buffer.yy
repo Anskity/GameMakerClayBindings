@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"buffer",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"buffer",
+  "parent":{
+    "name":"Clay",
+    "path":"Clay.yyp",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

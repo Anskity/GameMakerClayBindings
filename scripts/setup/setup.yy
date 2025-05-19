@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"setup",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"setup",
+  "parent":{
+    "name":"Clay",
+    "path":"Clay.yyp",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
