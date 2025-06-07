@@ -10,9 +10,10 @@ enum __ClayCommandType {
 }
 
 function clay_update() {
-    static update_handler = external_define(LIB_PATH, "clay_update", dll_cdecl, ty_string, 2, ty_string, ty_string);
+    static update_handler = external_define(LIB_PATH, "clay_update", dll_cdecl, ty_string, 3, ty_string, ty_string, ty_string);
     static args_buffer = buffer_create(1024, buffer_fixed, 1);
     static output_buffer = buffer_create(20*MB, buffer_fixed, 1);
+    static pointers_buffer = buffer_create(2*MB, buffer_fixed, 8);
     
     var error_output = buffer_peek(__ClayErrorOutput, 0, buffer_string);
     if error_output != "" {
@@ -27,8 +28,12 @@ function clay_update() {
     buffer_write(args_buffer, buffer_f32, -mouse_wheel_down()-mouse_wheel_up());
     buffer_write(args_buffer, buffer_f32, mouse_check_button(mb_left));
     buffer_write(args_buffer, buffer_f32, delta_time);
+    buffer_write(args_buffer, buffer_u32, __ElementAmount);
     
-    external_call(update_handler, buffer_get_address(args_buffer), buffer_get_address(output_buffer));
+    buffer_seek(pointers_buffer, buffer_seek_start, 0);
+    buffer_write(pointers_buffer, buffer_u64, addr64(__LayoutBuffer));
+    
+    external_call(update_handler, buffer_get_address(args_buffer), buffer_get_address(output_buffer), buffer_get_address(pointers_buffer));
     
     buffer_seek(output_buffer, buffer_seek_start, 0);
     var commands_amt = buffer_read(output_buffer, buffer_u32);

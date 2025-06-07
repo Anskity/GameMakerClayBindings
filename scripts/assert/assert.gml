@@ -15,3 +15,15 @@ function assert_type(value, type) {
         show_error($"Unmatched type: typeof {value} != {type}", true);
     }
 }
+
+function assert_eq(a, b) {
+    if a != b {
+        show_error($"{a} != {b}", true);
+    }
+}
+
+function assert_ne(a, b) {
+    if a == b {
+        show_error($"Assertion error: {a} == {b}", true);
+    }
+}

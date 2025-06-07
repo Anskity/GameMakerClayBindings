@@ -1,6 +1,8 @@
 #macro KB (1024)
 #macro MB (KB*1024)
 
+global.extrn_output = buffer_create(KB, buffer_fixed, 1);
+
 function addr64(buf) {
     gml_pragma("forceinline");
     return int64(buffer_get_address(buf));
